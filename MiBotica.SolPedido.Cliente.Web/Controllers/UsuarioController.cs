@@ -12,6 +12,7 @@ using MiBotica.SolPedido.Utiles.Helpers;
 
 namespace MiBotica.SolPedido.Cliente.Web.Controllers
 {
+    [Authorize]
     public class UsuarioController : BaseLN
     {
         // GET: Usuario

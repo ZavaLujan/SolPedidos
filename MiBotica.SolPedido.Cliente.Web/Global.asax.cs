@@ -17,6 +17,8 @@ namespace MiBotica.SolPedido.Cliente.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier = System.Security.Claims.ClaimTypes.NameIdentifier;
+
             #region Log
             log4net.Config.XmlConfigurator.Configure();
             #endregion
