@@ -1,0 +1,133 @@
+﻿@model List<MiBotica.SolPedido.Entidades.Core.Cliente>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main class="container-fluid">
+    <header class="d-flex justify-content-between align-items-center py-3 mb-4 border-bottom">
+        <h1 class="h2">Panel de Control</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">Agregar Nuevo</button>
+    </header>
+
+    <section class="row">
+        <div class="col-md-6">
+            <div class="card shadow-lg mb-4 rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Usuarios</h5>
+                    <p class="card-text display-4">@Model.Count()</p> <!-- Muestra el total de clientes -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-lg mb-4 rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Notificaciones Nuevas</h5>
+                    <p class="card-text display-4">27</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-lg rounded">
+                <div class="card-header">Crecimiento de Usuarios</div>
+                <div class="card-body">
+                    <canvas id="userGrowthChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-lg rounded">
+                <div class="card-header">Distribución de Clientes</div>
+                <div class="card-body">
+                    <canvas id="clientDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-12">
+            <div class="card shadow-lg rounded mb-4">
+                <div class="card-header">Comparación de Ingresos por Cliente</div>
+                <div class="card-body">
+                    <canvas id="clientRevenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Datos de Crecimiento de Usuarios
+    const ctx1 = document.getElementById('userGrowthChart').getContext('2d');
+    const userGrowthChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+            datasets: [{
+                label: 'Usuarios',
+                data: [120, 190, 300, 500, 700],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    // Verifica que el modelo no sea nulo
+    const zonas = @Html.Raw(Json.Encode(Model.GroupBy(c => c.Zona).Select(g => g.Key).ToList()));
+    const cantidadClientesPorZona = @Html.Raw(Json.Encode(Model.GroupBy(c => c.Zona).Select(g => g.Count()).ToList()));
+    const nombresClientes = @Html.Raw(Json.Encode(Model.Select(c => c.NombreCompleto).ToList()));
+
+    // Gráfico de Distribución de Clientes
+    const ctx2 = document.getElementById('clientDistributionChart').getContext('2d');
+    const clientDistributionChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: zonas,  // Zonas de clientes
+            datasets: [{
+                label: 'Clientes',
+                data: cantidadClientesPorZona,  // Cantidad de clientes por zona
+                backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    // Gráfico de Comparación de Ingresos por Cliente
+    const ctx3 = document.getElementById('clientRevenueChart').getContext('2d');
+    const clientRevenueChart = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: nombresClientes,  // Nombres de clientes
+            datasets: [{
+                label: 'Ingresos del Mes Pasado',
+                data: [1500, 2300, 1800, 2900, 2400, 2000, 1900],  // Datos de ejemplo
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Ingresos de Este Mes',
+                data: [1800, 2500, 1600, 3100, 2600, 2200, 2000],  // Datos de ejemplo
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>

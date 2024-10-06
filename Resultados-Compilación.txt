@@ -1,0 +1,5 @@
+﻿Compilación iniciada a las 2:46 PM...
+1>------ Operación Compilar iniciada: Proyecto: MiBotica.SolPedido.Cliente.Web, configuración: Debug Any CPU ------
+1>  MiBotica.SolPedido.Cliente.Web -> C:\Users\Gustavo\Desktop\Diseño de Sistemas\LAB 04 - layout\SolPedidos\MiBotica.SolPedido.Cliente.Web\bin\MiBotica.SolPedido.Cliente.Web.dll
+========== Compilación: 1 correcto, 0 erróneo, 5 actualizado, 0 omitido ==========
+========== Compilar completado a las 2:46 PM y tardó 02.935 segundos ==========
