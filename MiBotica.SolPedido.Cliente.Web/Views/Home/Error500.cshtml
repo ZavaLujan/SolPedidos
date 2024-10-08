@@ -1,8 +1,58 @@
-﻿
-@{
-    ViewBag.Title = "Error500";
+﻿@{
+    ViewBag.Title = "Error 500";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Error500</h2>
+<style>
+    .error-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 100px;
+        margin: 0 auto;
+        background-image: url('https://http.cat/images/500.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 85vh;
+        max-width: 900px; /* Límite máximo para el ancho */
+        width: 60vw; /* Ajustable para pantallas más pequeñas */
+        color: #fff;
+        position: relative;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra */
+        border-radius: 10px; /* Esquinas redondeadas */
+    }
 
+    .error-title {
+        font-size: 48px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .error-message {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+
+    .btn-back {
+        background-color: #605ca8;
+        color: #f9fafc;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+        .btn-back:hover {
+            background-color: #4a4a85; /* Color más oscuro al pasar el mouse */
+        }
+</style>
+
+<div class="error-container">
+    <h2 class="error-title">¡Oops! Error 500</h2>
+    <p class="error-message">Ha ocurrido un error interno en el servidor.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn-back">Volver a la Página Principal</a>
+</div>
