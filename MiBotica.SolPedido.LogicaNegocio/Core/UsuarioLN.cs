@@ -30,9 +30,9 @@ namespace MiBotica.SolPedido.LogicaNegocio.Core
             {
                 new UsuarioDA().InsertarUsuario(usuario);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception("Error al insertar el usuario: " + ex.Message);
             }
         }
 
@@ -62,6 +62,20 @@ namespace MiBotica.SolPedido.LogicaNegocio.Core
                 Log.Error(ex);
                 throw;
             }
+        }
+
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            try
+            {
+                UsuarioDA usuarioDA = new UsuarioDA();
+                return usuarioDA.ObtenerUsuarioPorId(id); // Llamar a la capa de acceso a datos
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el usuario por ID: " + ex.Message);
+            }
+
         }
 
     }

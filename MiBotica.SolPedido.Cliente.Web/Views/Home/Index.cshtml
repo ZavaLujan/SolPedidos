@@ -4,9 +4,10 @@
 }
 
 <main class="container-fluid">
+    @if (User.Identity.IsAuthenticated)
+    {
     <header class="d-flex justify-content-between align-items-center py-3 mb-4 border-bottom">
-        <h1 class="h2">Panel de Control</h1>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">Agregar Nuevo</button>
+        <h1 class="h2 text-center mb-2">Panel de Control</h1>
     </header>
 
     <section class="row">
@@ -14,7 +15,7 @@
             <div class="card shadow-lg mb-4 rounded">
                 <div class="card-body">
                     <h5 class="card-title">Total de Usuarios</h5>
-                    <p class="card-text display-4">@Model.Count()</p> <!-- Muestra el total de clientes -->
+                    <p class="card-text display-4">1,245</p>
                 </div>
             </div>
         </div>
@@ -59,6 +60,27 @@
             </div>
         </div>
     </section>
+    } else {
+    <section class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8f9fa; animation: fadeIn 2s;">
+        <div class="text-center" style="padding-top: 100px;">
+            <!-- Icono de engranajes animado -->
+            <div class="icon">
+                <i class="fas fa-cogs fa-spin" style="font-size: 100px; color: #007bff;"></i>
+            </div>
+
+            <!-- Título del sistema -->
+            <h1 class="display-3" style="font-weight: bold; color: #343a40; animation: slideIn 1.5s ease-out;">Diseño de Sistemas de Información</h1>
+
+            <!-- Subtítulo con una descripción elegante -->
+            <p class="lead" style="font-size: 24px; color: #6c757d; animation: slideIn 1.8s ease-out;">Laboratorio - Escribas y Benites</p>
+
+            <!-- Botón animado para iniciar sesión -->
+            <a href="/Login" class="btn btn-lg mt-4" style="animation: pulse 2s infinite; background-color: #605ca8; color: #f9fafc; ">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </a>
+        </div>
+    </section>
+    }
 </main>
 
 <!-- Chart.js -->
@@ -131,3 +153,47 @@
         }
     });
 </script>
+
+<!-- Incluye Font Awesome para los íconos -->
+@*<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>*@
+<!-- Font Awesome con la CDN estándar -->
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">*@
+
+<!-- Estilos para las animaciones -->
+<style>
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@keyframes slideIn {
+        from {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @@keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>

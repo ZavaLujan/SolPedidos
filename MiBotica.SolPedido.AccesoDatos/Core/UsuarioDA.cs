@@ -151,6 +151,30 @@ namespace MiBotica.SolPedido.AccesoDatos.Core
             return usuario;
         }
 
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            Usuario usuario = null;
+
+            using (SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["cnnSql"].ConnectionString))
+            {
+                using (SqlCommand comando = new SqlCommand("pa_UsuarioObtenerPorId", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@IdUsuario", id);
+
+                    conexion.Open();
+                    SqlDataReader reader = comando.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        usuario = LlenarEntidad(reader);
+                    }
+                }
+            }
+
+            return usuario;
+        }
+
         public Usuario BuscarUsuario(Usuario usuario)
         {
             if (usuario == null)
