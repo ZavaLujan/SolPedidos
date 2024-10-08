@@ -1,64 +1,65 @@
 ﻿@model MiBotica.SolPedido.Entidades.Core.Usuario
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="container mt-4">
+    <h2>Editar Usuario</h2>
 
-
-@using (Html.BeginForm())
-{
+    @using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
+
+    <div class="card shadow-lg p-4 animate__animated animate__fadeIn">
+        <h4 class="card-title">Información del Usuario</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
                 @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CodUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.CodUsuario, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
                 @Html.EditorFor(model => model.CodUsuario, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CodUsuario, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombres, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Nombres, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
                 @Html.EditorFor(model => model.Nombres, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nombres, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClaveTexto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.ClaveTexto, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
                 @Html.PasswordFor(model => model.ClaveTexto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ClaveTexto, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <input type="submit" value="Guardar" class="btn btn-lg" style="background-color: #605ca8; color: #f9fafc;"/>
+                <a href="@Url.Action("Index", "Usuario")" class="btn btn-secondary ml-2">Volver a la lista</a>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 }
