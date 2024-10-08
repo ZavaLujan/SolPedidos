@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace MiBotica.SolPedido.Cliente.Web.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
     {
         string rutaApi = "https://localhost:44393/api/";
@@ -39,7 +40,20 @@ namespace MiBotica.SolPedido.Cliente.Web.Controllers
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            MiBotica.SolPedido.Entidades.Core.Cliente cliente = new MiBotica.SolPedido.Entidades.Core.Cliente();
+            string metodo = "Cliente/" + id;
+            using (WebClient clienteApi = new WebClient())
+            {
+                clienteApi.Headers.Clear();
+                clienteApi.Headers[HttpRequestHeader.ContentType] = jsonMediaType;
+                clienteApi.Encoding = UTF8Encoding.UTF8;
+
+                // Obtener el cliente desde la API
+                string rutacompleta = rutaApi + metodo;
+                var data = clienteApi.DownloadString(new Uri(rutacompleta));
+                cliente = JsonConvert.DeserializeObject<MiBotica.SolPedido.Entidades.Core.Cliente>(data);
+            }
+            return View(cliente);
         }
 
         // GET: Cliente/Create

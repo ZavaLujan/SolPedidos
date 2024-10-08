@@ -1,46 +1,56 @@
 ﻿@model IEnumerable<MiBotica.SolPedido.Entidades.Core.Cliente>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Clientes";
 }
 
-<h2>Index</h2>
+<div class="container mt-4 animate__animated animate__fadeIn">
+    <h2>Lista de Clientes</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Codigo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Zona)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        <a href="@Url.Action("Create", "Cliente")" class="btn" style="background-color: #605ca8; color: #f9fafc;">Crear Nuevo</a>
+    </p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Codigo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Zona)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Codigo }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Codigo })
-        </td>
-    </tr>
+    <div class="card shadow-lg p-4 animate__animated animate__fadeIn">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().NombreCompleto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Zona)
+                    </th>
+                    <th class="text-center">Acciones</th> <!-- Alineado al centro -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zona)
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", "Cliente", new { id = item.Codigo })" class="btn btn-sm" style="background-color: #605ca8; color: #f9fafc;">Editar</a>
+                        <a href="@Url.Action("Details", "Cliente", new { id = item.Codigo })" class="btn btn-sm" style="background-color: #17a2b8; color: #fff;">Detalles</a>
+                        <a href="@Url.Action("Delete", "Cliente", new { id = item.Codigo })" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 }
-
-</table>
