@@ -1,20 +1,22 @@
 ﻿@model MiBotica.SolPedido.Entidades.Core.Cliente
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<div class="container mt-4 animate__animated animate__fadeIn">
+    <h2>Crear Cliente</h2>
 
-@using (Html.BeginForm()) 
-{
+    @using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Cliente</h4>
+        <h4>Detalles del Cliente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
             @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -41,12 +43,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn" style="background-color: #605ca8; color: #f9fafc;" />
             </div>
         </div>
     </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        <a href="@Url.Action("Index", "Cliente")" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
 </div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+}
